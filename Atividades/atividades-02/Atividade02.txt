@@ -1,0 +1,71 @@
+import 'dart:convert';
+
+// Classe Dependente
+class Dependente {
+  final String nome;
+
+  // Construtor nomeado
+  Dependente({required this.nome});
+
+  // Método para converter para JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'nome': nome,
+    };
+  }
+}
+
+// Classe Funcionario
+class Funcionario {
+  final String nome;
+  final List<Dependente> dependentes;
+
+  // Construtor nomeado
+  Funcionario({required this.nome, required this.dependentes});
+
+  // Método para converter para JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'nome': nome,
+      'dependentes': dependentes.map((dep) => dep.toJson()).toList(),
+    };
+  }
+}
+
+// Classe EquipeProjeto
+class EquipeProjeto {
+  final String nomeProjeto;
+  final List<Funcionario> funcionarios;
+
+  // Construtor nomeado
+  EquipeProjeto({required this.nomeProjeto, required this.funcionarios});
+
+  // Método para converter para JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'nomeProjeto': nomeProjeto,
+      'funcionarios': funcionarios.map((func) => func.toJson()).toList(),
+    };
+  }
+}
+
+void main() {
+  // Criando os dependentes
+  Dependente dep1 = Dependente(nome: "Ricardo");
+  Dependente dep2 = Dependente(nome: "Roberto");
+  Dependente dep3 = Dependente(nome: "Luska");
+
+  // Criando os funcionários com seus dependentes
+  Funcionario func1 = Funcionario(nome: "Jose", dependentes: [dep1]);
+  Funcionario func2 = Funcionario(nome: "Pablo", dependentes: [dep2, dep3]);
+
+  // Lista de funcionários
+  List<Funcionario> funcionarios = [func1, func2];
+
+  // Criando a equipe de projeto
+  EquipeProjeto equipe = EquipeProjeto(nomeProjeto: "Projeto Olá", funcionarios: funcionarios);
+
+  // Convertendo o objeto EquipeProjeto para JSON e imprimindo
+  String equipeJson = JsonEncoder.withIndent('  ').convert(equipe.toJson());
+  print(equipeJson);
+}
