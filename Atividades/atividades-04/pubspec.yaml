@@ -1,0 +1,13 @@
+name: Atividade4
+description: Uma breve descrição do seu projeto.
+version: 1.0.0
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: ^2.0.0  # Adicione outras dependências aqui
+
+
